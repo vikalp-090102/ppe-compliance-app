@@ -1,10 +1,10 @@
 streamlit
 supabase
 pandas
-numpy==1.26.4
+numpy
 Pillow
 ultralytics
 huggingface_hub
 lapx
 scipy
-opencv-python-headless==4.8.1.78
+opencv-python-headless
