@@ -1,4 +1,10 @@
-libgl1
-libglib2.0-0t64
-libsm6
-libxext6
+streamlit
+supabase
+pandas
+numpy
+Pillow
+ultralytics
+huggingface_hub
+lapx
+scipy
+opencv-python-headless==4.8.1.78
