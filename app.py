@@ -155,6 +155,14 @@ def process_video(video_path, det_model, pose_model, video_name, progress_bar, s
 
     cap.release()
     out.release()
+
+    # Convert to H.264 for browser compatibility
+    converted_path = tempfile.mktemp(suffix=".mp4")
+    os.system(f"ffmpeg -i {output_path} -vcodec libx264 -acodec aac {converted_path} -y -loglevel quiet")
+    if os.path.exists(converted_path) and os.path.getsize(converted_path) > 0:
+        os.unlink(output_path)
+        return converted_path, pd.DataFrame(compliance_log)
+
     return output_path, pd.DataFrame(compliance_log)
 
 # ── UI ────────────────────────────────────────────────────────────────────
