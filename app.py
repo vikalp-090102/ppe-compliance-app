@@ -24,8 +24,8 @@ supabase = get_supabase()
 @st.cache_resource
 def load_models():
     with st.spinner("Loading AI models... please wait"):
-        det_path  = hf_hub_download(repo_id="vikalp090/ppe-compliance-yolo11m", filename="best.pt")
-        pose_path = hf_hub_download(repo_id="vikalp090/ppe-compliance-yolo11m", filename="yolo11m-pose.pt")
+        det_path  = hf_hub_download(repo_id="vikalp090/ppe-compliance-yolo11m", filename="best (9).pt")
+        pose_path = hf_hub_download(repo_id="vikalp090/ppe-compliance-yolo11m", filename="yolo11m.pt")
         det_model  = YOLO(det_path)
         pose_model = YOLO(pose_path)
     return det_model, pose_model
