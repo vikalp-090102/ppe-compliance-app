@@ -201,9 +201,15 @@ if page == "📹 Run Detection":
             status_text.text(f"✅ Done! Processed in {elapsed} seconds")
             progress_bar.progress(1.0)
 
-            st.subheader("✅ Annotated Video")
+            st.subheader("✅ Processing Complete!")
             with open(output_path,"rb") as f:
-                st.video(f.read())
+                video_bytes = f.read()
+            st.download_button(
+                label     = "📥 Download Annotated Video",
+                data      = video_bytes,
+                file_name = "ppe_annotated_output.mp4",
+                mime      = "video/mp4"
+            )
 
             st.subheader("Compliance Log")
             st.dataframe(df, use_container_width=True)
