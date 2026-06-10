@@ -1,7 +1,7 @@
 streamlit
 supabase
 pandas
-numpy
+numpy==1.26.4
 Pillow
 ultralytics
 huggingface_hub
