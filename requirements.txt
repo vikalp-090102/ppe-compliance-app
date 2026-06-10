@@ -1,11 +1,4 @@
-streamlit
-supabase
-pandas
-numpy
-opencv-python-headless
-Pillow
-ultralytics
-huggingface_hub
-lapx
-scipy
 libgl1
+libglib2.0-0t64
+libsm6
+libxext6
