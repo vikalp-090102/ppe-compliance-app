@@ -8,3 +8,4 @@ ultralytics
 huggingface_hub
 lapx
 scipy
+libgl1
