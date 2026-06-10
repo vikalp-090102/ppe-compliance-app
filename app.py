@@ -193,13 +193,7 @@ if page == "📹 Run Detection":
             status_text.text(f"✅ Done! Processed in {elapsed} seconds")
             progress_bar.progress(1.0)
 
-            col1,col2,col3 = st.columns(3)
-            col1.metric("Unique Workers", df["Track ID"].nunique())
-            col2.metric("Total Alerts", (df["Alert"]=="Yes").sum())
-            compliance_rate = round((1-(df["Alert"]=="Yes").sum()/len(df))*100,1) if len(df)>0 else 0
-            col3.metric("Compliance Rate", f"{compliance_rate}%")
-
-            st.subheader("Annotated Video")
+            st.subheader("✅ Annotated Video")
             with open(output_path,"rb") as f:
                 st.video(f.read())
 
