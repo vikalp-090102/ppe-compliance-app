@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import cv2
 import numpy as np
 import tempfile
 import os
@@ -38,6 +37,7 @@ HAND_PPE     = [9,8]
 FEET_PPE     = [11,10]
 
 def process_video(video_path, det_model, pose_model, video_name, progress_bar, status_text):
+    import cv2
     cap    = cv2.VideoCapture(video_path)
     fps    = cap.get(cv2.CAP_PROP_FPS)
     width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -156,13 +156,11 @@ def process_video(video_path, det_model, pose_model, video_name, progress_bar, s
     cap.release()
     out.release()
 
-    # Convert to H.264 for browser compatibility
     converted_path = tempfile.mktemp(suffix=".mp4")
     os.system(f"ffmpeg -i {output_path} -vcodec libx264 -acodec aac {converted_path} -y -loglevel quiet")
     if os.path.exists(converted_path) and os.path.getsize(converted_path) > 0:
         os.unlink(output_path)
         return converted_path, pd.DataFrame(compliance_log)
-
     return output_path, pd.DataFrame(compliance_log)
 
 # ── UI ────────────────────────────────────────────────────────────────────
@@ -203,13 +201,7 @@ if page == "📹 Run Detection":
 
             st.subheader("✅ Processing Complete!")
             with open(output_path,"rb") as f:
-                video_bytes = f.read()
-            st.download_button(
-                label     = "📥 Download Annotated Video",
-                data      = video_bytes,
-                file_name = "ppe_annotated_output.mp4",
-                mime      = "video/mp4"
-            )
+                st.download_button("📥 Download Annotated Video", f.read(), "ppe_annotated_output.mp4", "video/mp4")
 
             st.subheader("Compliance Log")
             st.dataframe(df, use_container_width=True)
