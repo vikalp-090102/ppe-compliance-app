@@ -9,3 +9,4 @@ lapx
 scipy
 opencv-python-headless
 ffmpeg
+python-3.11
