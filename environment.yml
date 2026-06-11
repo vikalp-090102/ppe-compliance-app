@@ -5,14 +5,14 @@ channels:
 dependencies:
   - python=3.11
   - pip
-  - opencv
-  - libgl
+  - libgl1-mesa-glx
   - pip:
     - streamlit
     - supabase
     - pandas
     - numpy
     - Pillow
-    - ultralytics
+    - opencv-python-headless
+    - ultralytics[no-extra]
     - huggingface_hub
     - scipy
