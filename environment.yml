@@ -1,10 +1,11 @@
 name: ppe-compliance
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
   - python=3.11
   - pip
+  - opencv
   - pip:
     - streamlit
     - supabase
@@ -14,5 +15,3 @@ dependencies:
     - ultralytics
     - huggingface_hub
     - scipy
-    - opencv-python-headless
-    - ffmpeg-python
