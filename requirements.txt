@@ -3,6 +3,7 @@ supabase
 pandas
 numpy
 Pillow
+opencv-python-headless
 ultralytics
 huggingface_hub
 scipy
