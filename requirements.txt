@@ -6,5 +6,3 @@ Pillow
 ultralytics
 huggingface_hub
 scipy
-opencv-python-headless
-ffmpeg-python
