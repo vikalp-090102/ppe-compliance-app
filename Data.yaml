@@ -1,0 +1,21 @@
+import yaml
+
+data = {
+    "path"  : "/kaggle/working/merged_dataset",
+    "train" : "/kaggle/working/merged_dataset/train.txt",
+    "val"   : "/kaggle/working/merged_dataset/val.txt",
+    "nc"    : 17,
+    "names" : {
+        0:  "person", 1:  "head", 2:  "face",
+        3:  "glasses", 4:  "face-mask-medical", 5:  "face-guard",
+        6:  "ear", 7:  "earmuffs", 8:  "hands",
+        9:  "gloves", 10: "foot", 11: "shoes",
+        12: "safety-vest", 13: "tools", 14: "helmet",
+        15: "medical-suit", 16: "safety-suit"
+    }
+}
+
+with open("/kaggle/working/merged_dataset/merged.yaml", "w") as f:
+    yaml.dump(data, f, sort_keys=False)
+
+print("YAML created!")
