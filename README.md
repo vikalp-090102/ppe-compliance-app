@@ -31,9 +31,37 @@ Four datasets were merged to form the final training set of 12,481 training imag
 
 A key data cleaning step was removing all helmet annotations from the SH17 dataset. Investigation revealed that 93.3% of SH17 helmet labels were located in the bottom half of images, meaning the model was learning that helmets appear near the ground. Removing these labels and relying on Hardhat and Ultralytics datasets for helmet supervision corrected this bias.
 
+For the Roboflow Hardhat dataset, stratified sampling was applied to retain only 39% of images. Images were grouped by their class combinations and sampled proportionally from each group, ensuring all helmet styles and camera angles were represented without introducing too much helmet-heavy data that could unbalance the merged dataset.
+
 ---
 
-### 2. Model Training
+### 2. Feature Engineering
+
+Two categories of feature engineering were applied during training: data augmentation and dataset-level engineering.
+
+**Data Augmentation**
+
+The following augmentation parameters were set during training to improve generalization across varied construction site conditions:
+
+| Parameter | Value | Purpose |
+|---|---|---|
+| mosaic | 1.0 | Combines four images into one tile, exposing the model to multiple scenes and scales simultaneously |
+| mixup | 0.1 | Blends two images together at a low rate to improve robustness to overlapping objects |
+| degrees | 10.0 | Randomly rotates images up to 10 degrees to handle slightly tilted camera angles |
+| fliplr | 0.5 | Horizontally flips images 50% of the time to remove left/right bias |
+| hsv_h | 0.015 | Applies small hue shifts to handle lighting color variation across sites |
+| hsv_s | 0.7 | Varies saturation strongly to simulate different lighting intensities |
+| hsv_v | 0.4 | Varies brightness to handle shadows, overexposure, and indoor vs outdoor conditions |
+
+Mosaic augmentation at 1.0 was particularly important because it forces the model to detect small PPE items like gloves and glasses within crowded, multi-person scenes, which closely mirrors real construction site footage.
+
+**Dataset-Level Engineering**
+
+The Roboflow Hardhat dataset was included using stratified sampling at 39% rather than the full set. Stratified sampling groups images by their class label combinations and samples proportionally from each group, preserving diversity in helmet appearance, angle, and occlusion level while preventing the merged dataset from becoming helmet-heavy relative to other PPE classes.
+
+---
+
+### 3. Model Training
 
 **Model:** YOLOv11m (medium variant, 20 million parameters)  
 **Framework:** Ultralytics  
